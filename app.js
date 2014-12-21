@@ -1,8 +1,8 @@
 var storage = require('node-persist');
 storage.initSync();
 var hangoutsBot = require("hangouts-bot");
-var bot = new hangoutsBot("myemail@gmail.com", "mypassword"); //setup with google+ credentials
-var adminpass = "password"; //setup with password
+var bot = new hangoutsBot("example@gmail.com", "password"); //set to google login credentials!
+var authpass = "password"; //set to authorize password!
 var learnThings = {
     terms: [
         "you",
@@ -22,7 +22,7 @@ var learnThings = {
     definitions: [
         "I am a horse",
         "because horse",
-        "a horse",
+        "what is horse if eyes are not real",
         "horse",
         "yes",
         "horse is new",
@@ -53,7 +53,8 @@ var blacklist = [
     "delete",
     "authorize",
     "send",
-    "identify"
+    "identify",
+    "show"
 ];
 var cmds = {
     commands: [
@@ -94,6 +95,11 @@ bot.on('message', function(from, message) {
                         bot.sendMessage(from, "Cannot find the user!");
                     }
                 }
+                else if(terms[1].split(" ")[0] == "show"){
+                    for(var i=0; i<learnThings.terms.length; i++){
+                        bot.sendMessage(from,  learnThings.terms[i] + ": " + learnThings.definitions[i]);
+                    }
+                }
                 else {
                     if(learnThings.terms.indexOf(terms[1]) > -1){
                         learnThings.terms.splice(learnThings.terms.indexOf(terms[1]), 1);
@@ -112,7 +118,7 @@ bot.on('message', function(from, message) {
         }
         else if(message.split(" ")[0] == "authorize"){
             var terms = message.split(" ");
-            if(terms[1] == adminpass){
+            if(terms[1] == authpass){
                 authlist.push(from);
                 storage.setItem("authlist", authlist);
                 bot.sendMessage(from, "Now authorized!");
