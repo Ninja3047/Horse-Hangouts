@@ -126,7 +126,7 @@ bot.on('message', function(from, message) {
     } else if (message.split(" ")[0] == "send") {
       var terms = message.split("send ");
       terms = terms[1].split(" to ");
-      if (dmsys.ids.indexOf(terms[1]) > -1) {
+      if (dmsys.ids.indexOf(terms[terms.length-1]) > -1) {
         bot.sendMessage(dmsys.dests[dmsys.ids.indexOf(terms[1])], terms[0]);
         bot.sendMessage(from, "Successfuly send message to: " + terms[1]);
       } else {
