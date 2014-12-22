@@ -126,7 +126,7 @@ bot.on('message', function(from, message) {
     } else if (message.split(" ")[0] == "send") {
       var terms = message.split("send ");
       terms = terms[1].split(" to ");
-      if (dmsys.ids.indexOf(terms[terms.length-1]) > -1) {
+      if (dmsys.ids.indexOf(terms[terms.length - 1]) > -1) {
         bot.sendMessage(dmsys.dests[dmsys.ids.indexOf(terms[1])], terms[0]);
         bot.sendMessage(from, "Successfuly send message to: " + terms[1]);
       } else {
@@ -151,6 +151,7 @@ bot.on('message', function(from, message) {
           bot.sendMessage(from, "Invalid id. Make sure the end user has identified themselves!");
         }
       }
+      storage.setItem("dmsys", dmsys);
     } else if (message.split(" ")[0] == "identify") {
       if (dmsys.dests.indexOf(from) < 0) {
         if (dmsys.ids.indexOf(message.split(" ")[1]) < 0) {
@@ -165,6 +166,7 @@ bot.on('message', function(from, message) {
       } else {
         dmsys.ids[dmsys.dests.indexOf(from)] = message.split(" ")[1];
         bot.sendMessage(from, "Changed name to: " + dmsys.ids[dmsys.dests.indexOf(from)]);
+        storage.setItem("dmsys", dmsys);
       }
     } else if (cmds.commands.indexOf(message) > -1) {
       bot.sendMessage(from, cmds.results[cmds.commands.indexOf(message)]);
