@@ -180,8 +180,8 @@ bot.on('message', function(from, message) {
       if (message !== undefined) {
         if (message.length > 1) {
           var sections = message.split("|");
-          sections[0] = sections[0].replace(/[^]/gi, '');
-          if (sections.length == 2 && sections[0] !== "") {
+          sections[0] = sections[0].replace(/[^\s]/gi, '');
+          if (sections.length == 2) {
             if (learnThings.terms.indexOf(sections[0]) == -1 && cmds.commands.indexOf(sections[0]) == -1 && blacklist.indexOf(sections[0]) == -1) {
               learnThings.terms.push(sections[0]);
               learnThings.definitions.push(sections[1]);
