@@ -15,14 +15,16 @@ var learnThings = {
     "wow",
     "teach",
     "this",
-    "bot",
+    "how",
     "hello",
-    "hi"
+    "hi",
+    "lol",
+    "need"
   ],
   definitions: [
     "I am a horse",
     "because horse",
-    "what is horse if eyes are not real",
+    "a horse",
     "horse",
     "yes",
     "horse is new",
@@ -30,13 +32,16 @@ var learnThings = {
     "such horse",
     "I will learn you!!",
     "me",
-    "How can you prove I am a bot? If I am not conscious, are you? These are the questions Horse Bot asks every day.",
+    "by horsing",
     "Yo yo, Horsie in the house yeah!!",
-    "What's up!"
+    "What's up!",
+    "ha ha",
+    "nothing is needed, only given by Horse Bot himself!"
   ]
 };
 var blacklist = [
   "",
+  " ",
   "learn",
   "a",
   "the",
@@ -134,7 +139,7 @@ bot.on('message', function(from, message) {
       }
     } else if (message.split(" ")[0] == "give") {
       var terms = message.split("give ");
-      if (terms[1] == "check") {
+      if (terms[1] == "check" && dmsys.dests.indexOf(from) > -1) {
         bot.sendMessage(from, dmsys.amts[dmsys.dests.indexOf(from)] + " horse points!");
       } else {
         terms = terms[1].split(" to ");
@@ -175,7 +180,8 @@ bot.on('message', function(from, message) {
       if (message !== undefined) {
         if (message.length > 1) {
           var sections = message.split("|");
-          if (sections.length == 2) {
+          sections[0] = sections[0].replace(/[^\w\s]/gi, '');
+          if (sections.length == 2 && sections[0] !== "") {
             if (learnThings.terms.indexOf(sections[0]) == -1 && cmds.commands.indexOf(sections[0]) == -1 && blacklist.indexOf(sections[0]) == -1) {
               learnThings.terms.push(sections[0]);
               learnThings.definitions.push(sections[1]);
