@@ -135,7 +135,7 @@ bot.on('message', function(from, message) {
     } else if (message.split(" ")[0] == "give") {
       var terms = message.split("give ");
       if (terms[1] == "check") {
-        bot.sendMessage(from, dmsys.amts[dmsys.dests.indexOf(from)]);
+        bot.sendMessage(from, dmsys.amts[dmsys.dests.indexOf(from)] + " horse points!");
       } else {
         terms = terms[1].split(" to ");
         if (dmsys.ids.indexOf(terms[1]) > -1) {
@@ -163,7 +163,8 @@ bot.on('message', function(from, message) {
           bot.sendMessage(from, "username taken! contact an admin to delete identify " + message.split(" ")[1]);
         }
       } else {
-        bot.sendMessage(from, "Already registered as: " + dmsys.ids[dmsys.dests.indexOf(from)]);
+        dmsys.ids[dmsys.dests.indexOf(from)] = message.split(" ")[1];
+        bot.sendMessage(from, "Changed name to: " + dmsys.ids[dmsys.dests.indexOf(from)]);
       }
     } else if (cmds.commands.indexOf(message) > -1) {
       bot.sendMessage(from, cmds.results[cmds.commands.indexOf(message)]);
