@@ -139,7 +139,7 @@ bot.on('message', function(from, message) {
       } else {
         terms = terms[1].split(" to ");
         if (dmsys.ids.indexOf(terms[1]) > -1) {
-          if (dmsys.dests.indexOf(from) > -1 && dmsys.amts[dmsys.dests.indexOf(from)] > Math.abs(terms[0])) {
+          if (dmsys.dests.indexOf(from) > -1 && dmsys.amts[dmsys.dests.indexOf(from)] >= Math.abs(terms[0])) {
             dmsys.amts[dmsys.dests.indexOf(from)] -= Math.abs(terms[0]) * 1;
             dmsys.amts[dmsys.ids.indexOf(terms[1])] += Math.abs(terms[0]) * 1;
             bot.sendMessage(dmsys.dests[dmsys.ids.indexOf(terms[1])], "Received " + Math.abs(terms[0]) + " horse points.");
