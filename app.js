@@ -183,7 +183,7 @@ bot.on('message', function(from, message) {
           var sections = message.split("|");
           sections[0] = sections[0].replace(/[^\w\s]/gi, '');
           if (sections.length == 2) {
-            if (learnThings.terms.indexOf(sections[0]) == -1 && cmds.commands.indexOf(sections[0]) == -1 && blacklist.indexOf(sections[0]) == -1) {
+            if (learnThings.terms.indexOf(sections[0]) < 0 && cmds.commands.indexOf(sections[0]) < 0 && blacklist.indexOf(sections[0]) < 0 && blacklist.indexOf(sections[0].replace(/\s/g, '')) < 0) {
               learnThings.terms.push(sections[0]);
               learnThings.definitions.push(sections[1]);
               storage.setItem("learnThings", learnThings);
