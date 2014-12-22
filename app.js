@@ -139,11 +139,11 @@ bot.on('message', function(from, message) {
       } else {
         terms = terms[1].split(" to ");
         if (dmsys.ids.indexOf(terms[1]) > -1) {
-          if (dmsys.dests.indexOf(from) > -1 && dmsys.amts[dmsys.dests.indexOf(from)] > terms[0]) {
-            dmsys.amts[dmsys.dests.indexOf(from)] -= terms[0] * 1;
-            dmsys.amts[dmsys.ids.indexOf(terms[1])] += terms[0] * 1;
-            bot.sendMessage(dmsys.dests[dmsys.ids.indexOf(terms[1])], "Received " + terms[0] + " horse points.");
-            bot.sendMessage(from, "Successfuly transaction " + terms[0] + "pts!");
+          if (dmsys.dests.indexOf(from) > -1 && dmsys.amts[dmsys.dests.indexOf(from)] > abs(terms[0])) {
+            dmsys.amts[dmsys.dests.indexOf(from)] -= abs(terms[0]) * 1;
+            dmsys.amts[dmsys.ids.indexOf(terms[1])] += abs(terms[0]) * 1;
+            bot.sendMessage(dmsys.dests[dmsys.ids.indexOf(terms[1])], "Received " + abs(terms[0]) + " horse points.");
+            bot.sendMessage(from, "Successfuly transaction " + abs(terms[0]) + "pts!");
           } else {
             bot.sendMessage(from, "Not enough horse points!");
           }
