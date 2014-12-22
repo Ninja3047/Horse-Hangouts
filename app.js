@@ -181,7 +181,7 @@ bot.on('message', function(from, message) {
       if (message !== undefined) {
         if (message.length > 1) {
           var sections = message.split("|");
-          sections[0] = sections[0].replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          sections[0] = sections[0].replace(/[-\/\\"''^$*+?.()|[\]{}]/g, '\\$&');
           if (sections.length == 2) {
             if (learnThings.terms.indexOf(sections[0]) < 0 && learnThings.indexOf(sections[0].replace(/\s/g, '')) < 0 && cmds.commands.indexOf(sections[0]) < 0 && blacklist.indexOf(sections[0]) < 0 && blacklist.indexOf(sections[0].replace(/\s/g, '')) < 0) {
               learnThings.terms.push(sections[0]);
