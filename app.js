@@ -153,20 +153,20 @@ bot.on('message', function(from, message) {
       }
       storage.setItem("dmsys", dmsys);
     } else if (message.split(" ")[0] == "identify") {
-      if (dmsys.dests.indexOf(from) < 0) {
-        if (dmsys.ids.indexOf(message.split(" ")[1]) < 0) {
+      if (dmsys.ids.indexOf(message.split(" ")[1]) < 0) {
+        if (dmsys.dests.indexOf(from) < 0) {
           dmsys.ids.push(message.split(" ")[1]);
           dmsys.dests.push(from);
           dmsys.amts.push(100);
           bot.sendMessage(from, "Now identified as: " + message.split(" ")[1]);
           storage.setItem("dmsys", dmsys);
         } else {
-          bot.sendMessage(from, "username taken! contact an admin to delete identify " + message.split(" ")[1]);
+          dmsys.ids[dmsys.dests.indexOf(from)] = message.split(" ")[1];
+          bot.sendMessage(from, "Changed name to: " + dmsys.ids[dmsys.dests.indexOf(from)]);
+          storage.setItem("dmsys", dmsys);
         }
       } else {
-        dmsys.ids[dmsys.dests.indexOf(from)] = message.split(" ")[1];
-        bot.sendMessage(from, "Changed name to: " + dmsys.ids[dmsys.dests.indexOf(from)]);
-        storage.setItem("dmsys", dmsys);
+        bot.sendMessage(from, "username taken! contact an admin to delete identify " + message.split(" ")[1]);
       }
     } else if (cmds.commands.indexOf(message) > -1) {
       bot.sendMessage(from, cmds.results[cmds.commands.indexOf(message)]);
